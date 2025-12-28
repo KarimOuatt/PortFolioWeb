@@ -1,62 +1,113 @@
-import React from 'react';
-import { Github, Linkedin, Mail, Database, BarChart3, Brain, Download, Terminal, Cpu } from 'lucide-react';
+import { useState } from 'react';
+import { Github, Linkedin, Mail, BarChart3, Brain, Download, Terminal, Cpu, Globe } from 'lucide-react';
+
+// 1. On définit exactement ce qu'est une langue pour rassurer TypeScript
+type Language = 'fr' | 'en';
 
 function App() {
-  // --- DONNÉES DES PROJETS ---
-  const projects = [
-    {
-      title: "Prédiction de Churn (Telco)",
-      description: "Projet de Data Science complet : Nettoyage de données, analyse exploratoire et modélisation ML pour prédire le désabonnement client.",
-      tags: ["Python", "Scikit-learn", "Pandas", "Jupyter"],
-      github: "https://github.com/karimouatt/churn-prediction",
-      image: "https://images.pexels.com/photos/590022/pexels-photo-590022.jpeg?auto=compress&cs=tinysrgb&w=800"
-    },
-    {
-      title: "Interview Helper IA",
-      description: "Outil interactif d'aide à la préparation d'entrevues. Utilise l'IA pour simuler des questions et analyser les réponses en temps réel.",
-      tags: ["React", "Groq API", "n8n", "Tailwind"],
-      github: "https://github.com/karimouatt/interview-helper", 
-      image: "https://images.pexels.com/photos/590041/pexels-photo-590041.jpeg?auto=compress&cs=tinysrgb&w=800"
-    }
-  ];
+  // 2. On précise que 'lang' ne peut être QUE 'fr' ou 'en'
+  const [lang, setLang] = useState<Language>('fr');
 
-  // --- DONNÉES DES COMPÉTENCES (Identiques au CV) ---
-  const skills = [
-    {
-      icon: <Cpu className="w-6 h-6" />,
-      title: "Langages",
-      items: ["Python", "SQL", "Java", "R"]
+  const content = {
+    fr: {
+      heroTitle: "PortFolioWeb",
+      heroDesc: "Étudiant en Mathématiques et Informatique à l'Université de Montréal (orientation science des données). Passionné par le Machine Learning, l'IA générative et l'analyse de données complexes.",
+      btnCVFr: "CV Français",
+      btnCVEn: "English Resume",
+      sectionSkills: "Compétences Techniques",
+      sectionProjects: "Projets Récents",
+      footerRights: "© 2025 Abdoul Karim Ouattara. Tous droits réservés.",
+      projects: [
+        {
+          title: "Prédiction de Churn (Telco)",
+          description: "Projet de Data Science complet : Nettoyage de données, analyse exploratoire et modélisation ML pour prédire le désabonnement client.",
+          tags: ["Python", "Scikit-learn", "Pandas", "Jupyter"],
+          github: "https://github.com/KarimOuatt/Telco_churn",
+          image: "https://images.pexels.com/photos/590022/pexels-photo-590022.jpeg?auto=compress&cs=tinysrgb&w=800"
+        },
+        {
+          title: "Interview Helper IA",
+          description: "Outil interactif d'aide à la préparation d'entrevues. Utilise l'IA pour simuler des questions et analyser les réponses en temps réel.",
+          tags: ["React", "Groq API", "n8n", "Tailwind"],
+          github: "https://github.com/KarimOuatt/Interview_Helper", 
+          image: "https://images.pexels.com/photos/590041/pexels-photo-590041.jpeg?auto=compress&cs=tinysrgb&w=800"
+        }
+      ],
+      skills: [
+        { title: "Langages", items: ["Python", "SQL", "Java", "R"] },
+        { title: "Apprentissage Automatique & IA", items: ["PyTorch", "Scikit-learn", "TensorFlow", "OpenCV", "Groq API", "RLHF", "Hugging Face"] },
+        { title: "Bibliothèques Science des Données", items: ["Pandas", "NumPy", "Matplotlib", "Seaborn"] },
+        { title: "Outils de Développement", items: ["Git", "Docker", "Linux", "VS Code", "Streamlit", "n8n", "MatLab"] }
+      ]
     },
-    {
-      icon: <Brain className="w-6 h-6" />,
-      title: "Apprentissage Automatique & IA",
-      items: ["PyTorch", "Scikit-learn", "TensorFlow", "OpenCV", "Groq API", "RLHF", "Hugging Face"]
-    },
-    {
-      icon: <BarChart3 className="w-6 h-6" />,
-      title: "Bibliothèques Science des Données",
-      items: ["Pandas", "NumPy", "Matplotlib", "Seaborn"]
-    },
-    {
-      icon: <Terminal className="w-6 h-6" />,
-      title: "Outils de Développement",
-      items: ["Git", "Docker", "Linux", "VS Code", "Streamlit", "n8n", "MatLab"]
+    en: {
+      heroTitle: "PortFolioWeb",
+      heroDesc: "Mathematics and Computer Science student at the University of Montreal (Data Science track). Passionate about Machine Learning, Generative AI, and complex data analysis.",
+      btnCVFr: "French Resume",
+      btnCVEn: "English Resume",
+      sectionSkills: "Technical Skills",
+      sectionProjects: "Recent Projects",
+      footerRights: "© 2025 Abdoul Karim Ouattara. All rights reserved.",
+      projects: [
+        {
+          title: "Churn Prediction (Telco)",
+          description: "End-to-end Data Science project: Data cleaning, exploratory analysis (EDA), and ML modeling to predict customer churn.",
+          tags: ["Python", "Scikit-learn", "Pandas", "Jupyter"],
+          github: "https://github.com/KarimOuatt/Telco_churn",
+          image: "https://images.pexels.com/photos/590022/pexels-photo-590022.jpeg?auto=compress&cs=tinysrgb&w=800"
+        },
+        {
+          title: "AI Interview Helper",
+          description: "Interactive interview preparation tool. Uses AI to simulate questions and analyze user responses in real-time.",
+          tags: ["React", "Groq API", "n8n", "Tailwind"],
+          github: "https://github.com/KarimOuatt/Interview_Helper", 
+          image: "https://images.pexels.com/photos/590041/pexels-photo-590041.jpeg?auto=compress&cs=tinysrgb&w=800"
+        }
+      ],
+      skills: [
+        { title: "Languages", items: ["Python", "SQL", "Java", "R"] },
+        { title: "Machine Learning & AI", items: ["PyTorch", "Scikit-learn", "TensorFlow", "OpenCV", "Groq API", "RLHF", "Hugging Face"] },
+        { title: "Data Science Libraries", items: ["Pandas", "NumPy", "Matplotlib", "Seaborn"] },
+        { title: "Development Tools", items: ["Git", "Docker", "Linux", "VS Code", "Streamlit", "n8n", "MatLab"] }
+      ]
     }
+  };
+
+  const t = content[lang];
+
+  const skillIcons = [
+    <Cpu key="cpu" className="w-6 h-6" />,
+    <Brain key="brain" className="w-6 h-6" />,
+    <BarChart3 key="chart" className="w-6 h-6" />,
+    <Terminal key="term" className="w-6 h-6" />
   ];
 
   return (
     <div className="min-h-screen bg-zinc-950 text-white">
-      {/* Fond dégradé subtil */}
       <div className="absolute inset-0 bg-gradient-to-br from-zinc-900 via-zinc-950 to-black"></div>
 
       <div className="relative">
         {/* --- HEADER --- */}
         <header className="border-b border-zinc-800/50 backdrop-blur-sm bg-zinc-950/80 fixed top-0 left-0 right-0 z-50">
           <div className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-            <h1 className="text-xl font-bold tracking-tight">Karim Ouattara</h1>
-            <div className="flex items-center space-x-4">
+            <h1 className="text-xl font-bold tracking-tight hidden sm:block">Abdoul Karim Ouattara</h1>
+            <h1 className="text-xl font-bold tracking-tight sm:hidden">A.K. Ouattara</h1>
+            
+            <div className="flex items-center space-x-3 sm:space-x-4">
+              
+              {/* BOUTON LANGUE */}
+              <button 
+                onClick={() => setLang(lang === 'fr' ? 'en' : 'fr')}
+                className="flex items-center space-x-1 px-3 py-1.5 bg-zinc-800 hover:bg-zinc-700 rounded-lg text-sm font-medium transition-colors border border-zinc-700"
+              >
+                <Globe className="w-4 h-4" />
+                <span>{lang === 'fr' ? 'EN' : 'FR'}</span>
+              </button>
+
+              <div className="w-px h-6 bg-zinc-800 mx-1"></div>
+
               <a
-                href="https://github.com/karimouatt"
+                href="https://github.com/KarimOuatt"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-2 hover:bg-zinc-800/50 rounded-lg transition-colors"
@@ -65,7 +116,7 @@ function App() {
                 <Github className="w-5 h-5" />
               </a>
               <a
-                href="https://linkedin.com/in/ton-profil" // N'oublie pas de mettre ton vrai lien LinkedIn
+                href="https://linkedin.com/in/abdoulkaouatt"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-2 hover:bg-zinc-800/50 rounded-lg transition-colors"
@@ -74,10 +125,16 @@ function App() {
                 <Linkedin className="w-5 h-5" />
               </a>
               <a
-                href="mailto:ton.email@umontreal.ca" // Ton email
-                className="px-4 py-2 bg-white text-black rounded-lg hover:bg-zinc-200 transition-colors font-medium text-sm"
+                href="mailto:trkarimouatt@gmail.com"
+                className="hidden sm:block px-4 py-2 bg-white text-black rounded-lg hover:bg-zinc-200 transition-colors font-medium text-sm"
               >
                 Contact
+              </a>
+              <a
+                href="mailto:trkarimouatt@gmail.com"
+                className="sm:hidden p-2 hover:bg-zinc-800/50 rounded-lg transition-colors"
+              >
+                <Mail className="w-5 h-5" />
               </a>
             </div>
           </div>
@@ -90,36 +147,47 @@ function App() {
           <section className="mb-32">
             <div className="max-w-3xl">
               <h2 className="text-5xl sm:text-6xl font-bold mb-6 leading-tight">
-                Transformer les données en insights actionnables
+                {t.heroTitle}
               </h2>
               <p className="text-xl text-zinc-400 leading-relaxed mb-8">
-                Étudiant en Mathématiques et Informatique à l'Université de Montréal. 
-                Passionné par le Machine Learning, l'IA générative et l'analyse de données complexes.
+                {t.heroDesc}
               </p>
-              <a
-                href="/cv.pdf" // Assure-toi que ton fichier s'appelle bien cv.pdf dans le dossier public
-                download
-                className="inline-flex items-center space-x-2 px-6 py-3 bg-zinc-800 hover:bg-zinc-700 border border-zinc-700 rounded-lg transition-all font-medium"
-              >
-                <Download className="w-5 h-5" />
-                <span>Télécharger mon CV</span>
-              </a>
+              
+              <div className="flex flex-col sm:flex-row gap-4">
+                <a
+                  href="Abdoul_Karim_Ouattara_cv_FR.pdf"
+                  download="Abdoul_Karim_Ouattara_cv_FR.pdf"
+                  className="inline-flex items-center justify-center space-x-2 px-6 py-3 bg-white text-black hover:bg-zinc-200 rounded-lg transition-all font-medium"
+                >
+                  <Download className="w-5 h-5" />
+                  <span>{t.btnCVFr}</span>
+                </a>
+
+                <a
+                  href="Abdoul_Karim_Ouattara_cv_EN.pdf"
+                  download="Abdoul_Karim_Ouattara_cv_EN.pdf"
+                  className="inline-flex items-center justify-center space-x-2 px-6 py-3 bg-zinc-800 hover:bg-zinc-700 border border-zinc-700 text-white rounded-lg transition-all font-medium"
+                >
+                  <Download className="w-5 h-5" />
+                  <span>{t.btnCVEn}</span>
+                </a>
+              </div>
             </div>
           </section>
 
-          {/* Section Compétences (Mise à jour avec la grille 2x2) */}
+          {/* Section Compétences */}
           <section className="mb-32">
             <h3 className="text-sm font-semibold text-zinc-500 uppercase tracking-wider mb-8">
-              Compétences Techniques
+              {t.sectionSkills}
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {skills.map((skill, index) => (
+              {t.skills.map((skill, index) => (
                 <div
                   key={index}
                   className="bg-zinc-900/50 border border-zinc-800/50 rounded-xl p-6 hover:border-zinc-700/50 transition-colors"
                 >
                   <div className="flex items-center space-x-3 mb-4">
-                    <div className="text-zinc-400">{skill.icon}</div>
+                    <div className="text-zinc-400">{skillIcons[index]}</div>
                     <h4 className="font-semibold text-lg">{skill.title}</h4>
                   </div>
                   <div className="flex flex-wrap gap-2">
@@ -140,10 +208,10 @@ function App() {
           {/* Section Projets */}
           <section>
             <h3 className="text-sm font-semibold text-zinc-500 uppercase tracking-wider mb-8">
-              Projets Récents
+              {t.sectionProjects}
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {projects.map((project, index) => (
+              {t.projects.map((project, index) => (
                 <a
                   key={index}
                   href={project.github}
@@ -191,11 +259,11 @@ function App() {
           <div className="max-w-6xl mx-auto px-6 py-8">
             <div className="flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0">
               <p className="text-sm text-zinc-500">
-                © 2025 Karim Ouattara. Tous droits réservés.
+                {t.footerRights}
               </p>
               <div className="flex items-center space-x-6">
                 <a
-                  href="https://github.com/karimouatt"
+                  href="https://github.com/KarimOuatt"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-sm text-zinc-500 hover:text-white transition-colors"
@@ -203,15 +271,15 @@ function App() {
                   GitHub
                 </a>
                 <a
-                  href="https://linkedin.com/in/ton-profil" // N'oublie pas de changer
+                  href="https://linkedin.com/in/abdoulkaouatt"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-sm text-zinc-500 hover:text-white transition-colors"
                 >
-                  LinkedIn
+                  LinkedInn
                 </a>
                 <a
-                  href="mailto:ton.email@umontreal.ca" // N'oublie pas de changer
+                  href="mailto:trkarimouatt@gmail.com"
                   className="text-sm text-zinc-500 hover:text-white transition-colors"
                 >
                   Email
