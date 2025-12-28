@@ -28,7 +28,7 @@ function App() {
         {
           title: "Interview Helper IA",
           description: "Outil interactif d'aide à la préparation d'entrevues. Utilise l'IA pour simuler des questions et analyser les réponses en temps réel.",
-          tags: ["React", "Groq API", "n8n", "Tailwind"],
+          tags: ["Python", "Groq API", "huggingface","langchain"],
           github: "https://github.com/KarimOuatt/Interview_Helper", 
           image: "https://images.pexels.com/photos/590041/pexels-photo-590041.jpeg?auto=compress&cs=tinysrgb&w=800"
         }
@@ -59,7 +59,7 @@ function App() {
         {
           title: "AI Interview Helper",
           description: "Interactive interview preparation tool. Uses AI to simulate questions and analyze user responses in real-time.",
-          tags: ["React", "Groq API", "n8n", "Tailwind"],
+          tags: ["Python", "Groq API", "huggingface", "langchain"],
           github: "https://github.com/KarimOuatt/Interview_Helper", 
           image: "https://images.pexels.com/photos/590041/pexels-photo-590041.jpeg?auto=compress&cs=tinysrgb&w=800"
         }
