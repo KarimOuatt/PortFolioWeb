@@ -1,80 +1,62 @@
-import { Github, Linkedin, Mail, Database, BarChart3, Brain, Download } from 'lucide-react';
+import React from 'react';
+import { Github, Linkedin, Mail, Database, BarChart3, Brain, Download, Terminal, Cpu } from 'lucide-react';
 
 function App() {
+  // --- DONNÉES DES PROJETS ---
   const projects = [
     {
-      title: "Analyse Prédictive des Ventes",
-      description: "Modèle de machine learning pour prédire les tendances de ventes avec une précision de 94% utilisant Python et scikit-learn.",
-      tags: ["Python", "Scikit-learn", "Pandas", "Matplotlib"],
-      github: "https://github.com/username/sales-prediction",
+      title: "Prédiction de Churn (Telco)",
+      description: "Projet de Data Science complet : Nettoyage de données, analyse exploratoire et modélisation ML pour prédire le désabonnement client.",
+      tags: ["Python", "Scikit-learn", "Pandas", "Jupyter"],
+      github: "https://github.com/karimouatt/churn-prediction",
       image: "https://images.pexels.com/photos/590022/pexels-photo-590022.jpeg?auto=compress&cs=tinysrgb&w=800"
     },
     {
-      title: "Dashboard Analytique",
-      description: "Visualisation interactive de données complexes avec des insights en temps réel pour la prise de décision stratégique.",
-      tags: ["Python", "Plotly", "SQL", "Streamlit"],
-      github: "https://github.com/username/analytics-dashboard",
+      title: "Interview Helper IA",
+      description: "Outil interactif d'aide à la préparation d'entrevues. Utilise l'IA pour simuler des questions et analyser les réponses en temps réel.",
+      tags: ["React", "Groq API", "n8n", "Tailwind"],
+      github: "https://github.com/karimouatt/interview-helper", 
       image: "https://images.pexels.com/photos/590041/pexels-photo-590041.jpeg?auto=compress&cs=tinysrgb&w=800"
-    },
-    {
-      title: "Classification d'Images",
-      description: "Réseau de neurones convolutif pour la classification d'images médicales avec TensorFlow et Keras.",
-      tags: ["TensorFlow", "Keras", "CNN", "OpenCV"],
-      github: "https://github.com/username/image-classification",
-      image: "https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=800"
-    },
-    {
-      title: "Analyse de Sentiment NLP",
-      description: "Traitement du langage naturel pour analyser les sentiments dans les avis clients avec NLTK et transformers.",
-      tags: ["NLP", "NLTK", "Transformers", "Hugging Face"],
-      github: "https://github.com/username/sentiment-analysis",
-      image: "https://images.pexels.com/photos/7688336/pexels-photo-7688336.jpeg?auto=compress&cs=tinysrgb&w=800"
-    },
-    {
-      title: "Clustering Client",
-      description: "Segmentation de clients utilisant des algorithmes de clustering pour optimiser les stratégies marketing.",
-      tags: ["K-Means", "PCA", "Python", "Seaborn"],
-      github: "https://github.com/username/customer-clustering",
-      image: "https://images.pexels.com/photos/669610/pexels-photo-669610.jpeg?auto=compress&cs=tinysrgb&w=800"
-    },
-    {
-      title: "Séries Temporelles",
-      description: "Prévision de séries temporelles financières avec ARIMA et LSTM pour l'analyse de marché.",
-      tags: ["LSTM", "ARIMA", "Time Series", "Prophet"],
-      github: "https://github.com/username/time-series-forecast",
-      image: "https://images.pexels.com/photos/6801648/pexels-photo-6801648.jpeg?auto=compress&cs=tinysrgb&w=800"
     }
   ];
 
+  // --- DONNÉES DES COMPÉTENCES (Identiques au CV) ---
   const skills = [
     {
+      icon: <Cpu className="w-6 h-6" />,
+      title: "Langages",
+      items: ["Python", "SQL", "Java", "R"]
+    },
+    {
       icon: <Brain className="w-6 h-6" />,
-      title: "Machine Learning",
-      items: ["Scikit-learn", "TensorFlow", "PyTorch", "XGBoost"]
+      title: "Apprentissage Automatique & IA",
+      items: ["PyTorch", "Scikit-learn", "TensorFlow", "OpenCV", "Groq API", "RLHF", "Hugging Face"]
     },
     {
       icon: <BarChart3 className="w-6 h-6" />,
-      title: "Visualisation",
-      items: ["Matplotlib", "Seaborn", "Plotly", "Tableau"]
+      title: "Bibliothèques Science des Données",
+      items: ["Pandas", "NumPy", "Matplotlib", "Seaborn"]
     },
     {
-      icon: <Database className="w-6 h-6" />,
-      title: "Data Engineering",
-      items: ["SQL", "Pandas", "NumPy", "Apache Spark"]
+      icon: <Terminal className="w-6 h-6" />,
+      title: "Outils de Développement",
+      items: ["Git", "Docker", "Linux", "VS Code", "Streamlit", "n8n", "MatLab"]
     }
   ];
 
   return (
     <div className="min-h-screen bg-zinc-950 text-white">
+      {/* Fond dégradé subtil */}
       <div className="absolute inset-0 bg-gradient-to-br from-zinc-900 via-zinc-950 to-black"></div>
 
       <div className="relative">
+        {/* --- HEADER --- */}
         <header className="border-b border-zinc-800/50 backdrop-blur-sm bg-zinc-950/80 fixed top-0 left-0 right-0 z-50">
           <div className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-            <h1 className="text-xl font-bold tracking-tight">Data Scientist</h1>
+            <h1 className="text-xl font-bold tracking-tight">Karim Ouattara</h1>
             <div className="flex items-center space-x-4">
               <a
-                href="https://github.com/username"
+                href="https://github.com/karimouatt"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-2 hover:bg-zinc-800/50 rounded-lg transition-colors"
@@ -83,7 +65,7 @@ function App() {
                 <Github className="w-5 h-5" />
               </a>
               <a
-                href="https://linkedin.com/in/username"
+                href="https://linkedin.com/in/ton-profil" // N'oublie pas de mettre ton vrai lien LinkedIn
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-2 hover:bg-zinc-800/50 rounded-lg transition-colors"
@@ -92,7 +74,7 @@ function App() {
                 <Linkedin className="w-5 h-5" />
               </a>
               <a
-                href="mailto:contact@example.com"
+                href="mailto:ton.email@umontreal.ca" // Ton email
                 className="px-4 py-2 bg-white text-black rounded-lg hover:bg-zinc-200 transition-colors font-medium text-sm"
               >
                 Contact
@@ -101,18 +83,21 @@ function App() {
           </div>
         </header>
 
+        {/* --- MAIN CONTENT --- */}
         <main className="max-w-6xl mx-auto px-6 pt-32 pb-20">
+          
+          {/* Section Introduction */}
           <section className="mb-32">
             <div className="max-w-3xl">
               <h2 className="text-5xl sm:text-6xl font-bold mb-6 leading-tight">
                 Transformer les données en insights actionnables
               </h2>
               <p className="text-xl text-zinc-400 leading-relaxed mb-8">
-                Data Scientist spécialisé en machine learning et analyse prédictive.
-                Passionné par l'extraction de valeur à partir de données complexes pour résoudre des problèmes concrets.
+                Étudiant en Mathématiques et Informatique à l'Université de Montréal. 
+                Passionné par le Machine Learning, l'IA générative et l'analyse de données complexes.
               </p>
               <a
-                href="/cv.pdf"
+                href="/cv.pdf" // Assure-toi que ton fichier s'appelle bien cv.pdf dans le dossier public
                 download
                 className="inline-flex items-center space-x-2 px-6 py-3 bg-zinc-800 hover:bg-zinc-700 border border-zinc-700 rounded-lg transition-all font-medium"
               >
@@ -122,11 +107,12 @@ function App() {
             </div>
           </section>
 
+          {/* Section Compétences (Mise à jour avec la grille 2x2) */}
           <section className="mb-32">
             <h3 className="text-sm font-semibold text-zinc-500 uppercase tracking-wider mb-8">
-              Compétences
+              Compétences Techniques
             </h3>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {skills.map((skill, index) => (
                 <div
                   key={index}
@@ -151,9 +137,10 @@ function App() {
             </div>
           </section>
 
+          {/* Section Projets */}
           <section>
             <h3 className="text-sm font-semibold text-zinc-500 uppercase tracking-wider mb-8">
-              Projets
+              Projets Récents
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {projects.map((project, index) => (
@@ -199,15 +186,16 @@ function App() {
           </section>
         </main>
 
+        {/* --- FOOTER --- */}
         <footer className="border-t border-zinc-800/50 mt-32">
           <div className="max-w-6xl mx-auto px-6 py-8">
             <div className="flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0">
               <p className="text-sm text-zinc-500">
-                © 2025. Tous droits réservés.
+                © 2025 Karim Ouattara. Tous droits réservés.
               </p>
               <div className="flex items-center space-x-6">
                 <a
-                  href="https://github.com/username"
+                  href="https://github.com/karimouatt"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-sm text-zinc-500 hover:text-white transition-colors"
@@ -215,7 +203,7 @@ function App() {
                   GitHub
                 </a>
                 <a
-                  href="https://linkedin.com/in/username"
+                  href="https://linkedin.com/in/ton-profil" // N'oublie pas de changer
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-sm text-zinc-500 hover:text-white transition-colors"
@@ -223,7 +211,7 @@ function App() {
                   LinkedIn
                 </a>
                 <a
-                  href="mailto:contact@example.com"
+                  href="mailto:ton.email@umontreal.ca" // N'oublie pas de changer
                   className="text-sm text-zinc-500 hover:text-white transition-colors"
                 >
                   Email
