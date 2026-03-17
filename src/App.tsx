@@ -23,21 +23,21 @@ function App() {
           description: "Pipeline ETL complet exploitant les données ouvertes de Montréal. Nettoyage SQL complexe (RegEx, encodage UTF-8) et création d'un tableau de bord interactif Power BI.",
           tags: ["SQL", "MySQL", "Power BI", "ETL", "Data Cleaning"],
           github: "https://github.com/KarimOuatt/MTL_Immobilier_2023_2024",
-          image: "https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=800"
+          image: "/PortFolioWeb/demo_mtlpro20232024.gif"
         },
         {
           title: "Prédiction de Churn (Telco)",
           description: "Projet de Data Science complet : Nettoyage de données, analyse exploratoire et modélisation ML pour prédire le désabonnement client.",
           tags: ["Python", "Scikit-learn", "Pandas", "Jupyter"],
           github: "https://github.com/KarimOuatt/Telco_churn",
-          image: "https://images.pexels.com/photos/590022/pexels-photo-590022.jpeg?auto=compress&cs=tinysrgb&w=800"
+          image: "/PortFolioWeb/demo_churn_project.gif"
         },
         {
           title: "Interview Helper IA",
           description: "Outil interactif d'aide à la préparation d'entrevues. Utilise l'IA pour simuler des questions et analyser les réponses en temps réel.",
           tags: ["Python", "Groq API", "Hugging Face","LangChain"],
           github: "https://github.com/KarimOuatt/Interview_Helper", 
-          image: "https://images.pexels.com/photos/590041/pexels-photo-590041.jpeg?auto=compress&cs=tinysrgb&w=800"
+          image: "/PortFolioWeb/demo_interview_helper.gif"
         }
       ],
       skills: [
@@ -61,21 +61,21 @@ function App() {
           description: "End-to-end ETL pipeline using Montreal's Open Data. Advanced SQL cleaning (RegEx, UTF-8 encoding fixes) and interactive Power BI dashboard creation.",
           tags: ["SQL", "MySQL", "Power BI", "ETL", "Data Cleaning"],
           github: "https://github.com/KarimOuatt/MTL_Immobilier_2023_2024",
-          image: "https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=800"
+          image: "/PortFolioWeb/demo_mtlpro20232024.gif"
         },
         {
           title: "Churn Prediction (Telco)",
           description: "End-to-end Data Science project: Data cleaning, exploratory analysis (EDA), and ML modeling to predict customer churn.",
           tags: ["Python", "Scikit-learn", "Pandas", "Jupyter"],
           github: "https://github.com/KarimOuatt/Telco_churn",
-          image: "https://images.pexels.com/photos/590022/pexels-photo-590022.jpeg?auto=compress&cs=tinysrgb&w=800"
+          image: "/PortFolioWeb/demo_churn_project.gif"
         },
         {
           title: "AI Interview Helper",
           description: "Interactive interview preparation tool. Uses AI to simulate questions and analyze user responses in real-time.",
           tags: ["Python", "Groq API", "Hugging Face", "LangChain"],
           github: "https://github.com/KarimOuatt/Interview_Helper", 
-          image: "https://images.pexels.com/photos/590041/pexels-photo-590041.jpeg?auto=compress&cs=tinysrgb&w=800"
+          image: "/PortFolioWeb/demo_interview_helper.gif"
         }
       ],
       skills: [
@@ -237,7 +237,7 @@ function App() {
                     <img
                       src={project.image}
                       alt={project.title}
-                      className="w-full h-full object-cover opacity-60 group-hover:opacity-80 group-hover:scale-105 transition-all duration-300"
+                      className="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-300"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-zinc-900 to-transparent"></div>
                   </div>
