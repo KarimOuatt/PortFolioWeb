@@ -1,16 +1,20 @@
 import { useState } from 'react';
-import { Github, Linkedin, Mail, BarChart3, Brain, Download, Terminal, Cpu, Globe } from 'lucide-react';
+import { Github, Linkedin, Mail, BarChart3, Brain, Download, Terminal, Cpu, Globe, User, Code2, FolderGit2 } from 'lucide-react';
 
-// 1. On définit exactement ce qu'est une langue pour rassurer TypeScript
 type Language = 'fr' | 'en';
+type Section = 'about' | 'skills' | 'projects';
 
 function App() {
-  // 2. On précise que 'lang' ne peut être QUE 'fr' ou 'en'
   const [lang, setLang] = useState<Language>('fr');
+  // Nouvel état pour gérer la section active (barre bleue)
+  const [activeSection, setActiveSection] = useState<Section>('about');
 
   const content = {
     fr: {
-      heroTitle: "PortFolioWeb",
+      navAbout: "À propos",
+      navSkills: "Compétences",
+      navProjects: "Projets",
+      heroTitle: "Abdoul Karim Ouattara",
       heroDesc: "Étudiant en Mathématiques et Informatique à l'Université de Montréal (orientation science des données). Passionné par le Machine Learning, l'IA générative et l'analyse de données complexes.",
       btnCVFr: "CV Français",
       btnCVEn: "English Resume",
@@ -48,7 +52,10 @@ function App() {
       ]
     },
     en: {
-      heroTitle: "PortFolioWeb",
+      navAbout: "About",
+      navSkills: "Skills",
+      navProjects: "Projects",
+      heroTitle: "Abdoul Karim Ouattara",
       heroDesc: "Mathematics and Computer Science student at the University of Montreal (Data Science track). Passionate about Machine Learning, Generative AI, and complex data analysis.",
       btnCVFr: "French Resume",
       btnCVEn: "English Resume",
@@ -96,92 +103,107 @@ function App() {
     <Terminal key="term" className="w-6 h-6" />
   ];
 
+  // Fonction pour gérer le clic sur la navigation
+  const handleNavClick = (section: Section) => {
+    setActiveSection(section);
+    // Si la section n'est pas "about", on fait défiler vers l'ID correspondant
+    if (section !== 'about') {
+      document.getElementById(section)?.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
+  // Composant interne pour les boutons de navigation pour éviter la répétition
+  const NavButton = ({ id, icon: Icon, label }: { id: Section, icon: any, label: string }) => {
+    const isActive = activeSection === id;
+    return (
+      <button 
+        onClick={() => handleNavClick(id)}
+        className={`flex flex-col items-center justify-center pt-2 pb-1 px-4 min-w-[80px] transition-all duration-200 border-b-2 ${
+          isActive 
+            ? 'border-[#3B82F6] text-white' // Bleu vif et texte blanc pour l'actif
+            : 'border-transparent text-[#9290C3] hover:text-white hover:bg-white/5' // Gris clair sinon
+        }`}
+      >
+        <Icon className={`w-5 h-5 mb-1.5 ${isActive ? 'stroke-[2.5px]' : 'stroke-2'}`} />
+        <span className={`text-[13px] ${isActive ? 'font-semibold' : 'font-medium'}`}>{label}</span>
+      </button>
+    );
+  };
+
   return (
-    <div className="min-h-screen bg-zinc-950 text-white">
-      <div className="absolute inset-0 bg-gradient-to-br from-zinc-900 via-zinc-950 to-black"></div>
+    <div className="min-h-screen bg-[#070F2B] text-white font-['Inter',sans-serif] scroll-smooth">
+      <div className="absolute inset-0 bg-gradient-to-br from-[#1B1A55] via-[#070F2B] to-[#070F2B] fixed"></div>
 
       <div className="relative">
         {/* --- HEADER --- */}
-        <header className="border-b border-zinc-800/50 backdrop-blur-sm bg-zinc-950/80 fixed top-0 left-0 right-0 z-50">
-          <div className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-            <h1 className="text-xl font-bold tracking-tight hidden sm:block">Abdoul Karim Ouattara</h1>
-            <h1 className="text-xl font-bold tracking-tight sm:hidden">A.K. Ouattara</h1>
+        <header className="border-b border-[#1B1A55]/50 backdrop-blur-md bg-[#070F2B]/90 fixed top-0 left-0 right-0 z-50">
+          <div className="max-w-6xl mx-auto px-6 h-20 flex justify-between items-center">
             
-            <div className="flex items-center space-x-3 sm:space-x-4">
+            {/* GAUCHE: Avatar au lieu du texte */}
+            <div className="flex items-center">
+              <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-[#3B82F6]/50 bg-[#1B1A55] flex items-center justify-center p-0.5 cursor-pointer" onClick={() => handleNavClick('about')}>
+                {/* Remplace le src par le lien de ta vraie photo de profil */}
+                <img 
+                  src="https://api.dicebear.com/8.x/initials/svg?seed=AKO&backgroundColor=1B1A55&textColor=9290c3&fontSize=40&fontWeight=600" 
+                  alt="Avatar" 
+                  className="w-full h-full rounded-full object-cover"
+                />
+              </div>
+            </div>
+            
+            {/* CENTRE: Navigation Style "App" (Cachée sur très petits écrans) */}
+            <nav className="hidden md:flex h-full items-end gap-1">
+              <NavButton id="about" icon={User} label={t.navAbout} />
+              <NavButton id="skills" icon={Code2} label={t.navSkills} />
+              <NavButton id="projects" icon={FolderGit2} label={t.navProjects} />
+            </nav>
+
+            {/* DROITE: Langue et Réseaux */}
+            <div className="flex items-center space-x-3">
               
-              {/* BOUTON LANGUE */}
               <button 
                 onClick={() => setLang(lang === 'fr' ? 'en' : 'fr')}
-                className="flex items-center space-x-1 px-3 py-1.5 bg-zinc-800 hover:bg-zinc-700 rounded-lg text-sm font-medium transition-colors border border-zinc-700"
+                className="flex items-center space-x-1 px-3 py-1.5 bg-[#1B1A55] hover:bg-[#535C91] rounded-lg text-sm font-medium transition-colors border border-[#535C91]/50 text-[#9290C3] hover:text-white"
               >
                 <Globe className="w-4 h-4" />
                 <span>{lang === 'fr' ? 'EN' : 'FR'}</span>
               </button>
 
-              <div className="w-px h-6 bg-zinc-800 mx-1"></div>
+              <div className="w-px h-6 bg-[#1B1A55] mx-2 hidden sm:block"></div>
 
-              <a
-                href="https://github.com/KarimOuatt"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-2 hover:bg-zinc-800/50 rounded-lg transition-colors"
-                aria-label="GitHub"
-              >
-                <Github className="w-5 h-5" />
-              </a>
-              <a
-                href="https://linkedin.com/in/abdoulkaouatt"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-2 hover:bg-zinc-800/50 rounded-lg transition-colors"
-                aria-label="LinkedIn"
-              >
-                <Linkedin className="w-5 h-5" />
-              </a>
-              <a
-                href="mailto:trkarimouatt@gmail.com"
-                className="hidden sm:block px-4 py-2 bg-white text-black rounded-lg hover:bg-zinc-200 transition-colors font-medium text-sm"
-              >
-                Contact
-              </a>
-              <a
-                href="mailto:trkarimouatt@gmail.com"
-                className="sm:hidden p-2 hover:bg-zinc-800/50 rounded-lg transition-colors"
-              >
-                <Mail className="w-5 h-5" />
-              </a>
+              <div className="hidden sm:flex items-center space-x-1">
+                <a href="https://github.com/KarimOuatt" target="_blank" rel="noopener noreferrer" className="p-2 text-[#9290C3] hover:text-white hover:bg-[#1B1A55]/50 rounded-lg transition-colors">
+                  <Github className="w-5 h-5" />
+                </a>
+                <a href="https://linkedin.com/in/abdoulkaouatt" target="_blank" rel="noopener noreferrer" className="p-2 text-[#9290C3] hover:text-white hover:bg-[#1B1A55]/50 rounded-lg transition-colors">
+                  <Linkedin className="w-5 h-5" />
+                </a>
+              </div>
             </div>
           </div>
         </header>
 
         {/* --- MAIN CONTENT --- */}
-        <main className="max-w-6xl mx-auto px-6 pt-32 pb-20">
+        <main className="max-w-6xl mx-auto px-6 pt-36 pb-20">
           
           {/* Section Introduction */}
-          <section className="mb-32">
+          <section id="about" className="mb-32 scroll-mt-36">
             <div className="max-w-3xl">
               <h2 className="text-5xl sm:text-6xl font-bold mb-6 leading-tight">
                 {t.heroTitle}
               </h2>
-              <p className="text-xl text-zinc-400 leading-relaxed mb-8">
+              <p className="text-xl text-[#9290C3] leading-relaxed mb-8">
                 {t.heroDesc}
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4">
-                <a
-                  href="Abdoul_Karim_Ouattara_cv_FR.pdf"
-                  download="Abdoul_Karim_Ouattara_cv_FR.pdf"
-                  className="inline-flex items-center justify-center space-x-2 px-6 py-3 bg-white text-black hover:bg-zinc-200 rounded-lg transition-all font-medium"
-                >
+                <a href="Abdoul_Karim_Ouattara_cv_FR.pdf" download="Abdoul_Karim_Ouattara_cv_FR.pdf" className="inline-flex items-center justify-center space-x-2 px-6 py-3 bg-[#9290C3] text-[#070F2B] hover:bg-white rounded-lg transition-all font-medium">
                   <Download className="w-5 h-5" />
                   <span>{t.btnCVFr}</span>
                 </a>
-
-                <a
-                  href="Abdoul_Karim_Ouattara_cv_EN.pdf"
-                  download="Abdoul_Karim_Ouattara_cv_EN.pdf"
-                  className="inline-flex items-center justify-center space-x-2 px-6 py-3 bg-zinc-800 hover:bg-zinc-700 border border-zinc-700 text-white rounded-lg transition-all font-medium"
-                >
+                <a href="Abdoul_Karim_Ouattara_cv_EN.pdf" download="Abdoul_Karim_Ouattara_cv_EN.pdf" className="inline-flex items-center justify-center space-x-2 px-6 py-3 bg-[#1B1A55] hover:bg-[#535C91] border border-[#535C91]/50 text-white rounded-lg transition-all font-medium">
                   <Download className="w-5 h-5" />
                   <span>{t.btnCVEn}</span>
                 </a>
@@ -190,26 +212,20 @@ function App() {
           </section>
 
           {/* Section Compétences */}
-          <section className="mb-32">
-            <h3 className="text-sm font-semibold text-zinc-500 uppercase tracking-wider mb-8">
-              {t.sectionSkills}
+          <section id="skills" className="mb-32 scroll-mt-36">
+            <h3 className="text-sm font-semibold text-[#535C91] uppercase tracking-wider mb-8 flex items-center gap-2">
+              <Code2 className="w-5 h-5" /> {t.sectionSkills}
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {t.skills.map((skill, index) => (
-                <div
-                  key={index}
-                  className="bg-zinc-900/50 border border-zinc-800/50 rounded-xl p-6 hover:border-zinc-700/50 transition-colors"
-                >
+                <div key={index} className="bg-[#1B1A55]/30 border border-[#1B1A55] rounded-xl p-6 hover:border-[#535C91] transition-colors flex-col h-full">
                   <div className="flex items-center space-x-3 mb-4">
-                    <div className="text-zinc-400">{skillIcons[index]}</div>
+                    <div className="text-[#9290C3]">{skillIcons[index]}</div>
                     <h4 className="font-semibold text-lg">{skill.title}</h4>
                   </div>
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-2 flex-grow">
                     {skill.items.map((item, itemIndex) => (
-                      <span
-                        key={itemIndex}
-                        className="text-sm text-zinc-400 bg-zinc-800/50 px-3 py-1 rounded-full"
-                      >
+                      <span key={itemIndex} className="text-sm text-[#9290C3] bg-[#1B1A55] px-3 py-1 rounded-full font-['JetBrains_Mono',monospace]">
                         {item}
                       </span>
                     ))}
@@ -220,45 +236,26 @@ function App() {
           </section>
 
           {/* Section Projets */}
-          <section>
-            <h3 className="text-sm font-semibold text-zinc-500 uppercase tracking-wider mb-8">
-              {t.sectionProjects}
+          <section id="projects" className="scroll-mt-36">
+            <h3 className="text-sm font-semibold text-[#535C91] uppercase tracking-wider mb-8 flex items-center gap-2">
+              <FolderGit2 className="w-5 h-5" /> {t.sectionProjects}
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {t.projects.map((project, index) => (
-                <a
-                  key={index}
-                  href={project.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group bg-zinc-900/30 border border-zinc-800/50 rounded-xl overflow-hidden hover:border-zinc-700 transition-all duration-300 flex flex-col h-full"
-                >
-                  <div className="relative h-48 overflow-hidden bg-zinc-900 flex-shrink-0">
-                    <img
-                      src={project.image}
-                      alt={project.title}
-                      className="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-300"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-zinc-900 to-transparent"></div>
+                <a key={index} href={project.github} target="_blank" rel="noopener noreferrer" className="group bg-[#1B1A55]/20 border border-[#1B1A55] rounded-xl overflow-hidden hover:border-[#535C91] transition-all duration-300 flex flex-col h-full">
+                  <div className="relative h-48 overflow-hidden bg-[#070F2B] flex-shrink-0">
+                    <img src={project.image} alt={project.title} className="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#070F2B] to-transparent"></div>
                   </div>
                   <div className="p-6 flex flex-col flex-grow">
                     <div className="flex items-start justify-between mb-3">
-                      <h4 className="text-xl font-semibold group-hover:text-zinc-100 transition-colors">
-                        {project.title}
-                      </h4>
-                      <Github className="w-5 h-5 text-zinc-500 group-hover:text-white transition-colors flex-shrink-0 ml-4" />
+                      <h4 className="text-xl font-semibold group-hover:text-[#9290C3] transition-colors">{project.title}</h4>
+                      <Github className="w-5 h-5 text-[#535C91] group-hover:text-[#9290C3] transition-colors flex-shrink-0 ml-4" />
                     </div>
-                    <p className="text-zinc-400 mb-4 leading-relaxed flex-grow">
-                      {project.description}
-                    </p>
+                    <p className="text-[#9290C3] mb-4 leading-relaxed flex-grow">{project.description}</p>
                     <div className="flex flex-wrap gap-2 mt-auto">
                       {project.tags.map((tag, tagIndex) => (
-                        <span
-                          key={tagIndex}
-                          className="text-xs text-zinc-500 bg-zinc-800/50 px-2 py-1 rounded"
-                        >
-                          {tag}
-                        </span>
+                        <span key={tagIndex} className="text-xs text-[#9290C3] bg-[#1B1A55] px-2 py-1 rounded font-['JetBrains_Mono',monospace]">{tag}</span>
                       ))}
                     </div>
                   </div>
@@ -269,35 +266,14 @@ function App() {
         </main>
 
         {/* --- FOOTER --- */}
-        <footer className="border-t border-zinc-800/50 mt-32">
+        <footer className="border-t border-[#1B1A55] mt-32 relative z-10 bg-[#070F2B]/50 backdrop-blur-sm">
           <div className="max-w-6xl mx-auto px-6 py-8">
             <div className="flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0">
-              <p className="text-sm text-zinc-500">
-                {t.footerRights}
-              </p>
+              <p className="text-sm text-[#9290C3]">{t.footerRights}</p>
               <div className="flex items-center space-x-6">
-                <a
-                  href="https://github.com/KarimOuatt"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-sm text-zinc-500 hover:text-white transition-colors"
-                >
-                  GitHub
-                </a>
-                <a
-                  href="https://linkedin.com/in/abdoulkaouatt"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-sm text-zinc-500 hover:text-white transition-colors"
-                >
-                  LinkedIn
-                </a>
-                <a
-                  href="mailto:trkarimouatt@gmail.com"
-                  className="text-sm text-zinc-500 hover:text-white transition-colors"
-                >
-                  Email
-                </a>
+                <a href="https://github.com/KarimOuatt" target="_blank" rel="noopener noreferrer" className="text-sm text-[#9290C3] hover:text-white transition-colors">GitHub</a>
+                <a href="https://linkedin.com/in/abdoulkaouatt" target="_blank" rel="noopener noreferrer" className="text-sm text-[#9290C3] hover:text-white transition-colors">LinkedIn</a>
+                <a href="mailto:trkarimouatt@gmail.com" className="text-sm text-[#9290C3] hover:text-white transition-colors">Email</a>
               </div>
             </div>
           </div>
