@@ -16,8 +16,15 @@ function App() {
       btnCVEn: "English Resume",
       sectionSkills: "Compétences Techniques",
       sectionProjects: "Projets Récents",
-      footerRights: "© 2025 Abdoul Karim Ouattara. Tous droits réservés.",
+      footerRights: "© 2026 Abdoul Karim Ouattara. Tous droits réservés.",
       projects: [
+        {
+          title: "Transactions Immobilières (MTL)",
+          description: "Pipeline ETL complet exploitant les données ouvertes de Montréal. Nettoyage SQL complexe (RegEx, encodage UTF-8) et création d'un tableau de bord interactif Power BI.",
+          tags: ["SQL", "MySQL", "Power BI", "ETL", "Data Cleaning"],
+          github: "https://github.com/KarimOuatt/MTL-RealEstate-Data-Analysis",
+          image: "https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=800"
+        },
         {
           title: "Prédiction de Churn (Telco)",
           description: "Projet de Data Science complet : Nettoyage de données, analyse exploratoire et modélisation ML pour prédire le désabonnement client.",
@@ -37,7 +44,7 @@ function App() {
         { title: "Langages", items: ["Python", "SQL", "Java", "R"] },
         { title: "Apprentissage Automatique & IA", items: ["PyTorch", "Scikit-learn", "TensorFlow", "OpenCV", "Groq API", "RLHF", "Hugging Face"] },
         { title: "Bibliothèques Science des Données", items: ["Pandas", "NumPy", "Matplotlib", "Seaborn"] },
-        { title: "Outils de Développement", items: ["Git", "Docker", "Linux", "VS Code", "Streamlit", "n8n", "MatLab"] }
+        { title: "Outils de Développement", items: ["MySQL", "Git", "Docker", "Linux", "VS Code", "Streamlit", "n8n", "MatLab", "Power BI"] }
       ]
     },
     en: {
@@ -47,8 +54,15 @@ function App() {
       btnCVEn: "English Resume",
       sectionSkills: "Technical Skills",
       sectionProjects: "Recent Projects",
-      footerRights: "© 2025 Abdoul Karim Ouattara. All rights reserved.",
+      footerRights: "© 2026 Abdoul Karim Ouattara. All rights reserved.",
       projects: [
+        {
+          title: "Montreal Real Estate Analysis",
+          description: "End-to-end ETL pipeline using Montreal's Open Data. Advanced SQL cleaning (RegEx, UTF-8 encoding fixes) and interactive Power BI dashboard creation.",
+          tags: ["SQL", "MySQL", "Power BI", "ETL", "Data Cleaning"],
+          github: "https://github.com/KarimOuatt/MTL_Immobilier_2023_2024",
+          image: "https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=800"
+        },
         {
           title: "Churn Prediction (Telco)",
           description: "End-to-end Data Science project: Data cleaning, exploratory analysis (EDA), and ML modeling to predict customer churn.",
@@ -68,7 +82,7 @@ function App() {
         { title: "Languages", items: ["Python", "SQL", "Java", "R"] },
         { title: "Machine Learning & AI", items: ["PyTorch", "Scikit-learn", "TensorFlow", "OpenCV", "Groq API", "RLHF", "Hugging Face"] },
         { title: "Data Science Libraries", items: ["Pandas", "NumPy", "Matplotlib", "Seaborn"] },
-        { title: "Development Tools", items: ["Git", "Docker", "Linux", "VS Code", "Streamlit", "n8n", "MatLab"] }
+        { title: "Development Tools", items: ["MySQL", "Git", "Docker", "Linux", "VS Code", "Streamlit", "n8n", "MatLab", "Power BI"] }
       ]
     }
   };
@@ -217,9 +231,9 @@ function App() {
                   href={project.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group bg-zinc-900/30 border border-zinc-800/50 rounded-xl overflow-hidden hover:border-zinc-700 transition-all duration-300"
+                  className="group bg-zinc-900/30 border border-zinc-800/50 rounded-xl overflow-hidden hover:border-zinc-700 transition-all duration-300 flex flex-col h-full"
                 >
-                  <div className="relative h-48 overflow-hidden bg-zinc-900">
+                  <div className="relative h-48 overflow-hidden bg-zinc-900 flex-shrink-0">
                     <img
                       src={project.image}
                       alt={project.title}
@@ -227,17 +241,17 @@ function App() {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-zinc-900 to-transparent"></div>
                   </div>
-                  <div className="p-6">
+                  <div className="p-6 flex flex-col flex-grow">
                     <div className="flex items-start justify-between mb-3">
                       <h4 className="text-xl font-semibold group-hover:text-zinc-100 transition-colors">
                         {project.title}
                       </h4>
-                      <Github className="w-5 h-5 text-zinc-500 group-hover:text-white transition-colors flex-shrink-0" />
+                      <Github className="w-5 h-5 text-zinc-500 group-hover:text-white transition-colors flex-shrink-0 ml-4" />
                     </div>
-                    <p className="text-zinc-400 mb-4 leading-relaxed">
+                    <p className="text-zinc-400 mb-4 leading-relaxed flex-grow">
                       {project.description}
                     </p>
-                    <div className="flex flex-wrap gap-2">
+                    <div className="flex flex-wrap gap-2 mt-auto">
                       {project.tags.map((tag, tagIndex) => (
                         <span
                           key={tagIndex}
