@@ -22,7 +22,7 @@ function App() {
           title: "Transactions Immobilières (MTL)",
           description: "Pipeline ETL complet exploitant les données ouvertes de Montréal. Nettoyage SQL complexe (RegEx, encodage UTF-8) et création d'un tableau de bord interactif Power BI.",
           tags: ["SQL", "MySQL", "Power BI", "ETL", "Data Cleaning"],
-          github: "https://github.com/KarimOuatt/MTL-RealEstate-Data-Analysis",
+          github: "https://github.com/KarimOuatt/MTL_Immobilier_2023_2024",
           image: "https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=800"
         },
         {
